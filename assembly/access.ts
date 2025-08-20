@@ -1,4 +1,5 @@
 import { Engine } from "./engine";
+//this class serves as the intermediary between wasm and js
 
 let engine : Engine = new Engine();
 

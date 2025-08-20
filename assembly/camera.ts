@@ -11,16 +11,16 @@ export default class Camera {
         this.projection = new Matrix();//goofy ahh compiler needs this
         this.UpdateProjectionMatrix();
     }
-    Translate(vec4 :Vec4) {
-        this.pos.Add(vec4);
+    Translate(vec4 :Vec4) : void {
+        this.pos.AddR(vec4);
     }
-    SetPosition(vec4 : Vec4) {
+    SetPosition(vec4 : Vec4) : void {
         this.pos = vec4;
     }
-    TransformRot() {
+    TransformRot() : void {
         
     }
-    UpdateProjectionMatrix() {
+    UpdateProjectionMatrix() : void {
         this.projection = new Matrix();
     }
 }

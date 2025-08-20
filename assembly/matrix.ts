@@ -25,8 +25,9 @@ export default class Matrix { //only for a 4d matrix
         this.content[14] = v32;
         this.content[15] = v33;
     }
+    @operator('*')
     Product(mat2 : Matrix) : Matrix{
-        return new Matrix(
+        return new Matrix(//i dont trust the compiler so i unwrapped everyting
             this.content[0] * mat2.content[0] + this.content[1] * mat2.content[4] + this.content[2] * mat2.content[8] + this.content[3] * mat2.content[12],
             this.content[0] * mat2.content[1] + this.content[1] * mat2.content[5] + this.content[2] * mat2.content[9] + this.content[3] * mat2.content[13],
             this.content[0] * mat2.content[2] + this.content[1] * mat2.content[6] + this.content[2] * mat2.content[10] + this.content[3] * mat2.content[14],
@@ -49,7 +50,7 @@ export default class Matrix { //only for a 4d matrix
         )
     }
     VProduct(vec4: Vec4) : Vec4 {
-        return new Vec4(
+        return new Vec4(//treat vector as vertical matrix
             this.content[0]*vec4.x + this.content[1]*vec4.y + this.content[2]*vec4.z + this.content[3]*vec4.w,
             this.content[4]*vec4.x + this.content[5]*vec4.y + this.content[6]*vec4.z + this.content[7]*vec4.w,
             this.content[8]*vec4.x + this.content[9]*vec4.y + this.content[10]*vec4.z + this.content[11]*vec4.w,
@@ -63,5 +64,29 @@ export default class Matrix { //only for a 4d matrix
                this.content[2] * this.content[5] * this.content[8] -
                this.content[1] * this.content[4] * this.content[10] -
                this.content[0] * this.content[6] * this.content[9]
+    }
+    GetTranslation(vec4: Vec4) : Matrix {
+        return new Matrix(
+            1,0,0,vec4.x,
+            0,1,0,vec4.y,
+            0,0,1,vec4.z,
+            0,0,0,vec4.w
+        );
+    }
+    GetScale(factor: f32) : Matrix {
+        return new Matrix(
+            factor,0,0,0,
+            0,factor,0,0,
+            0,0,factor,0,
+            0,0,0,1
+        );
+    }
+    GetVScale(vec4: Vec4) : Matrix {
+        return new Matrix(
+            vec4.x,0,0,0,
+            0,vec4.y,0,0,
+            0,0,vec4.z,0,
+            0,0,0,vec4.w
+        );
     }
 }
